@@ -21,7 +21,10 @@
 
     <modules>
         <!-- 引入子模块所在的相对目录 -->
-        <module>test/recruit</module>
+        <module>coding/recruit</module>
+
+        <module>spring/boot</module>
+        <module>spring/cloud</module>
 
     </modules>
     <dependencyManagement>

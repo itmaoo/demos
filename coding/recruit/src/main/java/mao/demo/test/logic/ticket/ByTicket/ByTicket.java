@@ -1,9 +1,6 @@
-package mao.demo.test.recuit.ticket.ByTicket;
+package mao.demo.test.logic.ticket.ByTicket;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ByTicket {
     @Test

@@ -1,4 +1,4 @@
-package mao.demo.test.base;
+package mao.demo.test.java;
 
 public class Pojo {
     int age = 0;

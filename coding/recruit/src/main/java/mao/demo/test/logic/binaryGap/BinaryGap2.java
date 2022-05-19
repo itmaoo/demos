@@ -1,4 +1,4 @@
-package mao.demo.test.recuit.binaryGap;
+package mao.demo.test.logic.binaryGap;
 
 import org.junit.Test;
 

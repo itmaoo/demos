@@ -1,4 +1,4 @@
-package mao.demo.test.recuit.rotate;
+package mao.demo.test.logic.rotate;
 
 // you can also use imports, for example:
 // import java.util.*;

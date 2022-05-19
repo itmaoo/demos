@@ -1,4 +1,4 @@
-package mao.demo.test.recuit.rotate;
+package mao.demo.test.logic.rotate;
 
 import org.junit.Test;
 

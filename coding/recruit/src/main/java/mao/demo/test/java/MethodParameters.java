@@ -1,4 +1,4 @@
-package mao.demo.test.base;
+package mao.demo.test.java;
 
 import org.junit.Test;
 
