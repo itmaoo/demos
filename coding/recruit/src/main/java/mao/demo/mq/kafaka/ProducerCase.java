@@ -23,7 +23,7 @@ public class ProducerCase {
     @Before
     public void before() {
         props = new Properties();
-        props.put("bootstrap.servers", "10.49.196.10:9092");
+        props.put("bootstrap.servers", "192.168.3.162:9032");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("acks", "all");//所有follower都响应了才认为消息提交成功，即"committed"
@@ -46,11 +46,11 @@ public class ProducerCase {
     public void simpleUse() throws Exception {
         producer = new KafkaProducer<>(props);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             //发送key和value
-            producer.send(new ProducerRecord<String, String>("test", Integer.toString(i), "消息-" + i));
+            producer.send(new ProducerRecord<String, String>("test2", Integer.toString(i), "消息-" + i));
             //只发送value
-            producer.send(new ProducerRecord<String, String>("test", "消息2-" + i));
+        //    producer.send(new ProducerRecord<String, String>("test", "消息2-" + i));
         }
     }
 
@@ -68,9 +68,9 @@ public class ProducerCase {
             producer.beginTransaction();
             for (int i = 0; i < 10; i++) {
                 //发送key和value
-                producer.send(new ProducerRecord<String, String>("test", Integer.toString(i), "消息-" + i));
+                producer.send(new ProducerRecord<String, String>("test2", Integer.toString(i), "消息-" + i));
                 //只发送value
-                producer.send(new ProducerRecord<String, String>("test", "消息2-" + i));
+                producer.send(new ProducerRecord<String, String>("test2", "消息2-" + i));
             }
 
             producer.commitTransaction();

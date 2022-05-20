@@ -1,0 +1,26 @@
+docker run -d --name kafka3 \
+    --network kafka_default \
+    -e ALLOW_PLAINTEXT_LISTENER=yes \
+    -e KAFKA_BROKER_ID=3 \
+    -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9072 \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=192.168.3.162:2181 \
+    -e KAFKA_NUM_PARTITIONS=2 \
+    -e KAFKA_LISTENERS=PLAINTEXT://:9072 \
+    -p 9072:9072 \
+    bitnami/kafka:latest
+# kafka支持环境变量参数如 KAFKA_BROKER_ID
+
+#生产者和消费者
+kafka-console-producer.sh --broker-list localhost:9072 --topic test2
+kafka-console-consumer.sh --bootstrap-server 192.168.3.162:9092 --topic test2 --from-beginning
+
+#topic的创建和查看
+kafka-topics.sh --create --bootstrap-server 192.168.3.162:9092,192.168.3.162:9022,192.168.3.162:9032 --topic test --partitions 3 --replication-factor 1
+## bootstrap-server 可以配置成集群中一台或多台，最终都会在集群中所有的机器上创建对应的topic
+kafka-topics.sh --list --bootstrap-server localhost:9092
+kafka-topics.sh --describe --bootstrap-server 192.168.3.162:9092
+
+#docker-compose命令管理容器
+docker-compose  -f kafka-compose-dev.yml up -d
+docker-compose  -f /Users/mario/IdeaProjects/demos/operation/mq/kafaka/docker-compose-cluster.yml up -d
+docker-compose  -f /Users/mario/IdeaProjects/demos/operation/mq/kafaka/docker-compose-cluster.yml down

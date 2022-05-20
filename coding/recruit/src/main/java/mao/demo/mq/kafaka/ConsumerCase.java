@@ -31,7 +31,7 @@ public class ConsumerCase {
     @Before
     public void before() {
         props = new Properties();
-        props.put("bootstrap.servers", "10.49.196.10:9092");
+        props.put("bootstrap.servers", "localhost:9022");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("group.id", "test");
@@ -50,7 +50,7 @@ public class ConsumerCase {
         props.setProperty("enable.auto.commit", "true");
         props.setProperty("auto.commit.interval.ms", "1000");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Arrays.asList("test"));
+        consumer.subscribe(Arrays.asList("test2"));
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
             for (ConsumerRecord<String, String> record : records) {
