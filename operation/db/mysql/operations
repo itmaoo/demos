@@ -1,0 +1,6 @@
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+#另外启动一个container登陆上已经启动好的mysql
+docker run -it --network kafka_default --rm mysql mysql -hlocalhost -uroot -p
+
+grant all privileges on *.* to root@'%' with grant option;

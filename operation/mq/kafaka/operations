@@ -12,11 +12,18 @@ docker run -d --name kafka3 \
 
 #生产者和消费者
 kafka-console-producer.sh --broker-list localhost:9072 --topic test2
+#携带PID和SequenceNO 保证幂等性，Partiton中回保存PID和SequenceNO
+#ACK机制
 kafka-console-consumer.sh --bootstrap-server 192.168.3.162:9092 --topic test2 --from-beginning
+# consumerGroup 中的客户端组对一条消息消费一次，添加一个减少消费者会触发rebalance
+#rebalance触发条件，cosumer变化，topic或partition变化
+#消费者消费分区策略，分组分配，轮询，粘性分配（保持rebalance之前有效的分配）
+# 消费者要小于分区数，一个分区只能被一个消费者消费
 
 #topic的创建和查看
 kafka-topics.sh --create --bootstrap-server 192.168.3.162:9092,192.168.3.162:9022,192.168.3.162:9032 --topic test --partitions 3 --replication-factor 1
 ## bootstrap-server 可以配置成集群中一台或多台，最终都会在集群中所有的机器上创建对应的topic
+kafka-topics.sh --alter --bootstrap-server localhost:9092 --partition --topic test
 kafka-topics.sh --list --bootstrap-server localhost:9092
 kafka-topics.sh --describe --bootstrap-server 192.168.3.162:9092
 
@@ -24,3 +31,10 @@ kafka-topics.sh --describe --bootstrap-server 192.168.3.162:9092
 docker-compose  -f kafka-compose-dev.yml up -d
 docker-compose  -f /Users/mario/IdeaProjects/demos/operation/mq/kafaka/docker-compose-cluster.yml up -d
 docker-compose  -f /Users/mario/IdeaProjects/demos/operation/mq/kafaka/docker-compose-cluster.yml down
+
+docker run -d --name efak -p 8049:8048 -v /usr/local/bin/kafka-eagle/system-config.properties:/opt/kafka-eagle/conf/system-config.properties docker pull ydockerp/efak
+#启动之前需要启动mysql，并且创建好database ke
+docker run -d --name mysql \
+    --network kafka_default \
+    -e MYSQL_ROOT_PASSWORD=123456 \
+    mysql:latest
