@@ -1,0 +1,14 @@
+version: "3"
+services:
+  redis0:
+    image: 'redis-demo:latest'
+    ports:
+      - '6379:6379'
+  redis1:
+    image: 'redis-demo:latest'
+    ports:
+      - '6301:6379'
+  redis2:
+    image: 'redis-demo:latest'
+    ports:
+      - '6302:6379'

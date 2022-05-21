@@ -1,0 +1,19 @@
+#搭建集群需要更改的配置
+bind 允许所有IP访问
+dir 数据存储路径
+cluster-enabled 开启集群
+cluster-config-file 自动生成的文件
+cluster-node-timeout 集群超时
+appendonly 数据同步
+requirepass 设置redis密码
+masterauth 设置集群间访问密码
+port 端口默认6379
+protected-mode
+
+
+#创建镜像
+docker build /Users/mario/IdeaProjects/demos/operation/db/redis/ -t redis-demo
+
+docker-compose  -f /Users/mario/IdeaProjects/demos/operation/db/redis/docker-compose-cluster.yml up -d
+
+redis-cli -a 123456 --cluster create 192.168.3.162:6379 192.168.3.162:6301 192.168.3.162:6302
