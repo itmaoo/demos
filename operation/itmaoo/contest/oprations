@@ -1,0 +1,25 @@
+106.15.230.209
+#启动数据库
+mysqld --user=root
+
+#启动nginx
+nginx
+nginx -s reload
+
+#启动应用 目录/home/jars/下找到对应的Jar文件
+# sentinel启动后管理地址 http://106.15.230.209:20001/#/login   UP： sentinel/sentinel
+java -Dserver.port=20001 -Dcsp.sentinel.dashboard.server=localhost:20001 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.2.jar
+
+# SpringBoot Admin http://106.15.230.209:20000/
+java -jar monitor-1.0-SNAPSHOT.jar
+
+java -jar lion-1.0-SNAPSHOT.jar
+java -jar spider-1.0-SNAPSHOT.jar
+java -Dcsp.sentinel.dashboard.server=localhost:20001 -Dproject.name=shop -jar ishop-1.0-SNAPSHOT.jar -Dspring.config.location=./application.yml
+
+#启动应用简化命令 /home/shell/itmaoo.sh
+mao lion
+mao sentinel
+mao shop
+mao spider
+mao monitor

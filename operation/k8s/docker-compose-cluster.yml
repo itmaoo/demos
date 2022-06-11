@@ -1,0 +1,11 @@
+version: "3"
+services:
+  master:
+    image: 'centos:centos7'
+    command: "/bin/bash"
+  node1:
+    image: 'centos:centos7'
+    command: "/bin/bash"
+  node2:
+    image: 'centos:centos7'
+    command: "/bin/bash"

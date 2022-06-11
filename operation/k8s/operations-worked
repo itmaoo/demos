@@ -1,0 +1,24 @@
+kubectl create -f /Users/mario/IdeaProjects/demos/operation/k8s/pod-nginx.yaml
+kubectl delete -f /Users/mario/IdeaProjects/demos/operation/k8s/pod-nginx.yaml
+kubectl get pods
+#查看日志
+kubectl logs nginxmate
+#进入默认容器
+kubectl exec -it pod/nginxmate bash
+
+
+
+kubectl create -f /Users/mario/IdeaProjects/demos/operation/k8s/deployment-nginx.yml
+kubectl get deployment
+kubectl get pods
+kubectl delete deployment -name ngmd
+
+#创建外部可以访问的Service
+kubectl expose deploy ngmd --name=exposetest --type=NodePort --port=80 --target-port=80 -n ng
+
+kuberctl get svc
+# mariodeMBP:~ mario$ kubectl get svc
+# NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+# exposetest   NodePort    10.109.184.94   <none>        80:31178/TCP   71s
+# kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        4d
+# 访问地址 http://localhost:31178/
