@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Memoirs</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="source/css/books.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="source/image/book.ico">
+    <script src="source/js/jQuery.min.js"></script>
+    <script src="source/js/three.js"></script>
+    <script src="source/js/Tween.js"></script>
+    <script src="source/js/TrackballControls.js"></script>
+    <script src="source/js/CSS3DRenderer.js"></script>
+
+</head>
+<body>
+<div id="container"></div>
+<div id="feeling">DESCRIPTION</div>
+<div id="menu">
+    <button id="grid">GRID</button>
+    <button id="helix">HELIX</button>
+    <div id="info"><a href="http://threejs.org" target="_blank" rel="noopener">three.js css3d</a> - periodic <a href="https://threejs.org/examples/#css3d_periodictable" target="_blank" rel="noopener">table.</a></div>
+    <!--room for searching niput!-->
+</div>
+<script>
+    let table = [
+        ["钢铁是怎样炼成的","尼.奥斯特洛夫斯基","2008","奋",""],
+        ["安徒生童话","安徒生","2009","淡",""],
+        ["爱与痛的边缘","郭敬明","2009","悲",""],
+        ["左手倒影，右手年华","郭敬明","2009","悲",""],
+        ["童年","高尔基","2009","淡",""],
+        ["骆驼祥子","老舍","2010","悲",""],
+        ["繁星春水","冰心","2010","喜",""],
+        ["朝花夕拾","鲁迅","2010","淡",""],
+        ["伊索寓言","伊索","2010","淡",""],
+        ["一千零一夜","阿拉伯","2010","淡",""],
+        ["金银岛","史蒂文森","2010","淡",""],
+        ["爱丽丝梦游仙境","刘易斯.卡罗尔","2010","淡",""],
+        ["昆虫记","法布尔","2010","淡",""],
+        ["呐喊","鲁迅","2010","淡",""],
+        ["老人与海","海明威","2010","淡",""],
+        ["木偶奇遇记","卡洛.科洛迪","2010","淡",""],
+        ["彷徨","鲁迅","2010","淡",""],
+        ["格列佛游记","斯威夫特","2010","淡",""],
+        ["鲁滨孙漂流记","笛福","2010","淡",""],
+        ["汤姆索亚历险记","马克.吐温","2010","淡",""],
+        ["藏地密码 X","何马","2010","奋",""],
+        ["梦里花落知多少","郭敬明","2010","悲",""],
+        ["爱的教育","米契斯","2010","温",""],
+        ["格兰特船长的儿女","凡尔纳","2011","淡",""],
+        ["海底两万里","凡尔纳","2011","淡",""],
+        ["威尼斯商人","莎士比亚","2011","淡",""],
+        ["水浒传","施耐庵","2011","奋","千古蓼洼埋玉地，落花啼鸟总关愁-巅峰期过后衰落总是那么的猝不及防。"],
+        ["悲惨世界","雨果","2011","淡","心灵的救赎是不易的，有些错是不能尝试的，因为即使你想弥补，但往往无力回天。"],
+        ["绿野仙踪","李兰.法兰克.鲍姆","2011","淡",""],
+        ["悲伤逆流成河","郭敬明","2011","悲","击碎一切的从来都不是陌生人的冷嘲热讽，而是最重要的那个人的只字片言。"],
+        ["名人传","罗曼.罗兰","2011","淡","绝对的优秀衍生绝对的骄傲，绝对的骄傲不可避免的带来妒忌，天才的困苦大多源自与此。"],
+        ["巴黎圣母院","雨果","2011","悲","没有谁不配拥有爱情，即使是“满天星”，它也美丽盛开。"],
+        ["沙漏","饶雪漫","2011","淡",""],
+        ["复活 X","罗霸道","2011","淡",""],
+        ["夏有乔木，雅望天堂","籽月","2011","淡",""],
+        ["花火","卡比丘","2011","淡",""],
+
+        ["盗墓笔记 VIII","南派三叔","2009-2012","淡","誓言在说出的那一刻是真诚的，当时的心意是不容置疑的，至于岁月洗刷后，还剩些什么，不得而知。"],
+        ["三千鸦杀","十四部","2012","淡",""],
+        ["无极","郭敬明","2012","悲",""],
+        ["三国演义","罗贯中","2012","奋","我们总以为是故事中的主角，殊不知只是故事中寥寥几字背后“逝去”的孤魂。"],
+        ["鬼吹灯 VIII","天下霸唱","2012","淡",""],
+        ["夏至未至","郭敬明","2012","悲",""],
+        ["飘","米切尔","2012","温","艰难困苦听起来十分可怕，但真正降临时，也没有什么是不可以承受的，一无所有亦无所畏惧。"],
+        ["临界.爵迹 III","郭敬明","2013","奋",""],
+        ["幻城","郭敬明","2013","悲","如果命运已经确定，做什么都无法挽回，那还要做什么吗？还是要做的，做了就有希望。"],
+        ["小时代 IV","郭敬明","2013","悲","在你我未曾接触到的生活圈子中，他人是怎样的，你永远无法想象的到。"],
+        ["黄河鬼棺","南派三叔","2013","淡",""],
+        ["白墙上的舌头","佚名","2013","淡",""],
+        ["诡魅湘西","一度苍穹","2013","淡",""],
+        ["鬼吹灯前传 VI","糖衣古典","2013","淡",""],
+        ["鬼吹灯外传 VI","糖衣古典","2013","淡",""],
+        ["吉祥纹莲花楼 II","藤萍","2013","淡",""],
+        ["羽系列 IV","沧月","2012-2014","喜","青鸟与飞鱼的邂逅，曾经刻在心上的影子也会在时光中悄然换了模样。"],
+
+        ["镜系列 VI","沧月","2014","悲","如果一切行为都可以用爱去解释，这样的世界多了温情，少了理性，更加疯狂。"],
+        ["半生缘", "张爱玲", "2014", "哀","我们再也回不去了。时光可以令一切改变，即使我们的时光如此短暂。某些擦身而过就是一辈子。"],
+        ["悟空传", "今何在", "2014","愤","每个人眼中的世界都是世界想让你看的样子，或者说一切只是在于你如何去看，在忽略他人的眼光、言语后。"],
+        ["百年孤独", "加西亚·马尔克斯", "2014", "哀","孤独不需要理由，无分场合，或许天生。寄望于另一颗相同的心不知是否可以驱散？"],
+        ["小王子", "安托万·德·圣埃克苏佩里", "2014", "淡","儿时的童真早已无处去寻，童心未泯原来真的是一件值得骄傲的事情。"],
+        ["西行漫记","埃德加·斯诺","2014","淡","先贤的生活我们无法体会，只需铭记，感恩，珍惜，努力。"],
+        ["明朝那些事儿 VII", "当年明月", "2015","喜","家教初识贾雯钧，共同学习，互通书籍，得以见此书。见证一段快乐无忧时光，成功--以自己的方式度过此生。"],
+        ["偷影子的人", "马克•李维", "2015", "淡","同学赠书，理想中缘分的最佳诠释，丢失的人总会再见，即使人生如此短暂。确实如此？"],
+        ["追风筝的人", "卡勒德·胡赛尼", "2015","淡","责任一直在那里，罪孽存在与否只是看你如何想罢了。短短数十载，可以承担亦可以浑浑噩噩。"],
+        ["平凡的世界 II", "路遥", "2015", "淡","你是你，我无法是你，你我的道路是不同的，选择背后是什么，只有做出选择后才会知晓。"],
+        ["人月神话","弗雷德里克·布鲁克斯","2015","淡","没有银弹-一切道理定律都有其前提条件，以结果往前追溯缘由，无法解释处，即是神学。"],
+        ["人生", "路遥", "2015","淡","踏实，在日常小事之中是不可或缺的；踏实，在大的潮流之中是有待考量的。那份边界你能否把握？"],
+        ["一句顶一万句", "刘震云", "2015", "哀","有话说，无比重要，心有灵犀难以企及，沟通方能拉近距离。你还愿和他说话吗？"],
+        ["围城", "钱钟书", "2016", "哀","于西安与湖南的火车上，为了一些执着而有的旅程，反而是此时读到了书中关于婚姻与旅程的一些话，铭记于心。此生不复入湘。"],
+        ["海边的卡夫卡", "村上春树", "2016", "懵","不知所云，在幻想中迷失了方向，未能领悟需要领悟的东西。"],
+        ["head first python","Paul Barry","2016","淡","Life is short,you need python."],
+        ["摆渡人", "克莱儿•麦克福尔", "2016","淡","邂逅，无论在何处，都是一种美好，值得花光所有的运气让其持久下去。"],
+        ["撒哈拉的故事", "三毛", "2016","坦","波涛是暂时的，平淡才是长久的，平淡的那一刻平常的你我都不以为意，殊不知那是余生难忘的。"],
+        ["挪威的森林", "村上春树", "2017","哀","生命本就没有交待就会逝去，身边的人也不会说完再见才离去。唯有逝者永恒。"],
+        ["白鹿原", "陈忠实", "2017","淡","只有岁月才能够判定是非，时光面前，你我都只是附和者，追随者。"],
+        ["白夜行", "东野圭吾", "2017","悲","绝对的光明即绝对的黑暗，黑暗中又有多少人在潜行。你我拥有的一切又是由多少人在苦苦支撑着的？"],
+        ["放学后", "东野圭吾", "2018", "淡","无心之举最为伤人，自尊是最为要命也是最为脆弱的东西，可以一文不值，也可以值得付诸一切。"],
+        ["恶意", "东野圭吾", "2018","淡","你我不得不带上伪装，他人又何尝不是？卸下之后，你到底是谁？你到底凭借什么成为你。"],
+        ["新参者", "东野圭吾", "2018", "暖","世界不像想的那么好，也不像想的那么坏，心中的那份柔软为谁而触动？又想触动谁？"],
+        ["嫌疑人X的献身", "东野圭吾", "2018","悲","背后的那些付出，到底该与何人说？想让你知道，又不想让你知道。满天星--愿为配角。"],
+        ["活着", "余华", "2018", "怜","好好活，本就需要勇气，身旁的人都已逝去，长生不老又有何意义？我存在，只因为你们还在。"],
+        ["你的孤独虽败犹荣", "刘同", "2018", "淡","你此时的感受，并不是你一人独有的，每个人都会在某个时刻与你有同感。"],
+
+
+        ["黄金时代", "王小波", "2019","愧","社会总是令“性”存于黑暗中，灌输的、大众认同的真的是对的吗？它到底当解释为怎样的一种存在？"],
+        ["我的阴阳两界", "王小波", "2019", "淡","我以为我永远不会，没想到永远那么短暂。"],
+        ["三十而立", "王小波", "2019", "坦","放开自我无视他人眼光的那一刻，我才是真的我自己。那是在一定规则下的完全释然。"],
+        ["我们仨","杨绛","2019","暖","这云聚了又散，散了又聚，散了杳无踪迹，但相聚的那些平淡日子中的那份欢喜是存在过的。"],
+        ["推拿","毕飞宇","2019","撼","藏起心中的思绪万千，外在的缺陷让你我愈加的敏感，寄希望于长处来弥补，但最后发现一切都是枉然。生活却还得继续。"],
+        ["明朝那些事儿 VII 再读", "当年明月", "2019","叹","再次重看这段历史，或拜服，或痛恨，或无奈，短短几页就是别人的一生。古今多少事，都付笑谈中。"],
+        ["人间失格", "太宰治", "2019", "戚","人，活成我这番光景，该如何评价呢？平凡？庸碌？还是废物？没救？ - 自怨自艾？幡然醒悟？一如既往？"],
+        ["奔跑吧！梅勒斯", "太宰治", "2019", "淡",""],
+        ["维庸之妻", "太宰治", "2019", "憎","永远无法想象得到堕落的底线是什么？只有远离才是唯一应该做的。"],
+        ["斜阳", "太宰治", "2019", "恸","当身边的人都已逝去，我的精神该寄于何处？无能为力的事情太多，亲眼看着眼前人慢慢离去，世间诸多事多是无所谓。"],
+        ["漫长的告别", "雷蒙德•钱德勒", "2019", "淡","悲剧在于拥有过又失去了；美丽的一切最终变得苍老而粗鄙，这等若将美好撕碎。"],
+        ["人类简史", "尤瓦尔•赫拉利", "2019", "撼","思维的局限一直存在着，所想源于所知，跳出某个角度，可能是另一番风景。"],
+        ["人生海海", "麦家", "2019", "叹","人生海海，过馆人生。"],
+        ["解密", "麦家", "2019", "懵","解密紫密黑密。而我却未能解密书中真正的秘密。"],
+        ["你是我不及的梦", "三毛", "2020", "伤","离别总是常态，它让曾经的时光更加的美好。"],
+        ["今日简史", "尤瓦尔•赫拉利", "2020", "惊","人生本就没有意义，需要的只是减少'痛苦'。"],
+        ["虚无的十字架", "东野圭吾", "2020", "愧","有些错误犯下了可能需要一辈子去救赎吧。"],
+        ["危险的维纳斯", "东野圭吾", "2020", "淡","或许，平淡普通才会更加幸福吧。"],
+        ["西游记", "吴承恩", "2020", "淡",""],
+        ["罪与罚", "陀思妥耶夫斯基", "2021", "淡","任何行为都可以找到对应的非做不可的甚至高尚的理由，但这并不意味它就应该做。"],
+        ["未来简史", "尤瓦尔•赫拉利", "2021", "淡","意识代表的不一定是智能，叙事自我所构建的故事或许并不那么重要。"],
+        ["乌合之众", "古斯塔夫•庞勒", "2021", "淡","群体弊端的来源可能只是掩去了个体责任感。"],
+        ["欧也妮•葛朗台", "巴尔扎克", "2021", "淡","不是金钱泯灭了人性，而是畸形的欲望葬送了一切。"],
+        ["三体", "刘慈欣", "2021", "撼","时间面前，一切都是可笑而渺小的；仰起头，身下的一切都无足轻重，一切都无所谓，但是低下头，这也就是你拥有的一切，是组成你的一切。"],
+        ["超行星纪元", "刘慈欣", "2021", "淡","无知者无畏。"],
+        ["球形闪电", "刘慈欣", "2021", "淡","心中总有一片净土，就在那里。"],
+        
+        ["身份的焦虑", "阿兰•德波顿", "2022", "释","幸福感来源于良好的社交，然而社交却总难以避免与自以为的同层次的人的比较，这又恰恰是痛苦的根源。"],
+        ["达•芬奇的密码", "丹•布朗", "2022", "惑","对于无法理解的只需保持敬畏，万物各有其道。"],
+        ["雪国", "川端康成", "2022", "虚","总是万般皆虚无，一切还是要继续啊。"],
+        ["生命是什么", "埃尔温•薛定谔", "2022", "淡","生命可视作获取负熵抵抗熵增以维护有序的过程；绝对零度下，分子的混乱将不再影响物理事件。"],
+        ["绝叫", "叶真中显", "2022", "惘","每个人都想要找到自己降生于这个时代这片土地意义，但一切只是混乱的巧合罢了，能做到唯有不计一切活下去。"]
+
+    ];
+
+    let camera, scene, renderer;
+    let controls;
+    let objects = [];
+    let targets = {grid: [], helix: []};
+    init();
+    animate();
+
+    function init() {
+        camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
+        camera.position.z = 2000;
+        scene = new THREE.Scene();
+        for (let i = 0; i < table.length; i++) {
+            // book div
+            let element = document.createElement("div");
+            element.className = "element";
+            element.style.backgroundColor = "rgba(0,127,127," + (Math.random() * 0.3 + 0.45) + ")";
+
+            // number
+            let number = document.createElement("div");
+            number.className = "number";
+            number.textContent = table[i][2] + "";
+            element.appendChild(number);
+
+            //name and author container
+            let name_author_con = document.createElement("div");
+            name_author_con.className = "name_author";
+            element.append(name_author_con);
+
+            // name div
+            let book_name = document.createElement("div");
+            book_name.className = "book_name";
+            book_name.textContent = table[i][0];
+            name_author_con.appendChild(book_name);
+
+            // author
+            let author = document.createElement("div");
+            author.className = "author";
+            author.textContent = table[i][1];
+            name_author_con.appendChild(author);
+
+            element.addEventListener("click",function () {
+               document.getElementById("feeling").textContent = table[i][0]+" - "+table[i][4];
+            },false);
+
+            element.addEventListener("touchend",function () {
+                document.getElementById("feeling").textContent = table[i][0]+" - "+table[i][4];
+            },false);
+
+            let object = new THREE.CSS3DObject(element);
+            object.position.x = Math.random() * 4000 - 2000;
+            object.position.y = Math.random() * 4000 - 2000;
+            object.position.z = Math.random() * 4000 - 2000;
+            scene.add(object);
+            objects.push(object);
+
+            // let object = new THREE.Object3D();
+            // // object.position.x = (table[i][4] *140)-1330;
+            // // object.position.y = -(table[i][5]*180)+990;
+            // tem_x = i%10;
+            // tem_y = parseInt((i-tem_x)/10);
+            // object.position.x = (tem_x *270)-1200;
+            // object.position.y = -(tem_y*390)+500;
+            //
+            //
+            // targets.table.push(object);
+        }
+
+
+        for ( let i = 0; i < objects.length; i ++ ) {
+            let object = new THREE.Object3D();
+            object.position.x = ( ( i % 5 ) * 400 ) - 800;
+            object.position.y = ( - ( Math.floor( i / 5 ) % 5 ) * 400 ) + 800;
+            object.position.z = ( Math.floor( i / 25 ) ) * 1000 - 2000;
+            targets.grid.push( object );
+        }
+
+        let vector = new THREE.Vector3();
+        for ( let j = 0, k = objects.length; j < k; j ++ ) {
+            let theta = j * 0.175 + Math.PI;
+            let y = - ( j * 8 ) + 450;
+            let object = new THREE.Object3D();
+            object.position.setFromCylindricalCoords( 900, theta, y );
+            vector.x = object.position.x * 2;
+            vector.y = object.position.y;
+            vector.z = object.position.z * 2;
+            object.lookAt( vector );
+            targets.helix.push( object );
+        }
+
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("container").appendChild(renderer.domElement);
+
+        controls = new THREE.TrackballControls(camera, renderer.domElement);
+        controls.rotateSpeed = 0.5;
+        controls.minDistance = 500;
+        controls.maxDistance = 6000;
+        controls.addEventListener("change", render);
+
+        var button = document.getElementById("helix");
+        button.addEventListener("click", function () {
+            transform(targets.helix, 2000);
+        },false);
+
+        var button = document.getElementById("grid");
+        button.addEventListener("click", function () {
+            transform(targets.grid, 2000);
+        },false);
+        transform(targets.grid, 2000);
+
+        window.addEventListener("resize", onWindowResize, false)
+
+    }
+
+    function transform(targets, duration) {
+        TWEEN.removeAll();
+        for (let i = 0; i < objects.length; i++) {
+            let object = objects[i];
+            let target = targets[i];
+            new TWEEN.Tween(object.position)
+                .to({x: target.position.x, y: target.position.y, z: target.position.z}, Math.random() * duration)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+            new TWEEN.Tween(object.rotation)
+                .to({x: target.rotation.x, y: target.rotation.y, z: target.rotation.z}, Math.random() * duration)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+        }
+        new TWEEN.Tween(this)
+            .to({}, duration * 2)
+            .onUpdate(render)
+            .start();
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        render();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        TWEEN.update();
+        controls.update();
+    }
+
+    function render() {
+        renderer.render(scene, camera)
+    }
+
+
+</script>
+
+
+</body>
+</html>

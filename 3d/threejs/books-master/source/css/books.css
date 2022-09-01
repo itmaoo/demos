@@ -1,0 +1,117 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #000000;
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+a {
+    color: #ffffff;
+}
+
+#menu {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#info {
+    position: absolute;
+    right: 40px;
+    bottom: 5px;
+    color: #ffffff;
+    padding: 5px;
+    font-family: Monospace;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+}
+
+@media screen and (max-width: 700px) {
+    #info{display: none;}
+}
+
+#feeling {
+    color: rgba(127, 255, 255, 0.75);
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+    height: 30px;
+}
+
+.element {
+    width: 140px;
+    height: 180px;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    border: 1px solid rgba(127, 255, 255, 0.25);
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.element:hover {
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.75);
+    border: 1px solid rgba(127, 255, 255, 0.75);
+}
+
+.element .number {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    color: rgba(127, 255, 255, 0.75);
+    font-size: 20px;
+}
+
+.element .name_author {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+}
+
+.element .name_author .book_name {
+    /*position: absolute;*/
+    top: 0px;
+    left: 0;
+    right: 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+}
+
+.element .name_author .author {
+    /*position: absolute;*/
+    top: 0px;
+    left: 0;
+    right: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(127, 255, 255, 0.65);
+}
+
+button {
+    color: rgba(127, 255, 255, 0.75);
+    background: transparent;
+    outline: 1px solid rgba(127, 255, 255, 0.75);
+    border: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgba(0, 255, 255, 0.5);
+}
+
+button:active {
+    color: #000000;
+    background-color: rgba(0, 255, 255, 0.75);
+}

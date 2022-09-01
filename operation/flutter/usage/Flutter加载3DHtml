@@ -1,0 +1,63 @@
+https://threejs.org/examples/#css3d_periodictable
+
+方案一WebView（只支持IOS和Android不支持desktop）
+
+Flutter中如何加载并预览本地的html文件的方法
+
+这篇文章主要介绍了Flutter中如何加载并预览本地的html文件的方法，文中通过示例代码介绍的非常详细，对大家的学习或者工作具有一定的参考学习价值，需要的朋友们下面随着小编来一起学习学习吧
+直接进入主题，大概步骤如下
+
+在 assets 创建需要访问 html 文件，如下
+
+
+这里创建一个files文件夹，专门来放这些静态 html 文件.
+
+在 pubspec.yaml 中配置访问位置
+   assets:
+  - assets/images/
+  - assets/files/
+在 pubspec.yaml 添加 webview_flutter 插件依赖
+  webview_flutter: ^0.3.15+1
+  // 具体版本请查看官网
+进入实际的代码操作
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+class AgreementPage extends StatefulWidget {
+ @override
+ _AgreementPageState createState() => _AgreementPageState();
+}
+
+class _AgreementPageState extends State<AgreementPage> {
+ WebViewController _webViewController;
+ String filePath = 'assets/files/agreement.html';
+
+ @override
+ Widget build(BuildContext context) {
+  return Scaffold(
+   appBar: AppBar(title: Text('享你来服务条款')),
+   body: WebView(
+    initialUrl: '',
+    javascriptMode: JavascriptMode.unrestricted,
+    onWebViewCreated: (WebViewController webViewController) {
+     _webViewController = webViewController;
+     _loadHtmlFromAssets();
+    },
+   )
+  );
+ }
+
+  _loadHtmlFromAssets() async {
+  String fileHtmlContents = await rootBundle.loadString(filePath);
+  _webViewController.loadUrl(Uri.dataFromString(fileHtmlContents,
+      mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+    .toString());
+ }
+}
+
+方案二 HtmlElementView （不支持Desktop）
+方案三 IFrame 支持加载Html页面 不支持JS交互
+
