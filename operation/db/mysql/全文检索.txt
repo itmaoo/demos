@@ -1,0 +1,14 @@
+Mysql全文检索的支持版本
+  MySQL 5.6 以前的版本，只有 MyISAM 存储引擎支持全文索引；
+  MySQL 5.6 及以后的版本，MyISAM 和 InnoDB 存储引擎均支持全文索引;
+  只有字段的数据类型为 char、varchar、text 及其系列才可以建全文索引。
+
+通过 SQL 语句 ALTER TABLE 创建全文索引，支持中文要添加条件 WITH PARSER ngram
+  ALTER TABLE `itmaoo_shop`.`product_base`
+  ADD FULLTEXT INDEX `p` (`name`, `extend_info`, `info`) WITH  PARSER ngram;
+
+对数据进行修复
+  REPAIR TABLE product_base;
+
+使用全文检索
+  SELECT * FROM product_base WHERE MATCH(name,extend_info,info) AGAINST ("生活" IN Boolean MODE);
