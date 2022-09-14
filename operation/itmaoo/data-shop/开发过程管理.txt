@@ -3,3 +3,84 @@
 修改登录页面
 新增接口详情页面
 新增支付页面
+
+问题：前端，在API页面下搜索时，一直无法删除搜索条件
+解决：当前页面只进行build 不会触发init，所以不要在int中触发刷新，要在build中触发刷新
+
+
+2022-09-13
+后端
+部署Kong，添加api.itmaoo.com
+方案1 共享服务器（使用）
+当前服务器是CentOS，kong自2.8.0之后不再支持CentSO安装包
+docker部署最为稳妥
+yum -y install docker
+service docker start
+
+ docker network create kong-net
+
+ docker run -d --name kong-database \
+  --network=kong-net \
+  -p 5432:5432 \
+  -e "POSTGRES_USER=kong" \
+  -e "POSTGRES_DB=kong" \
+  -e "POSTGRES_PASSWORD=kongpass@123" \
+  postgres:9.6
+
+docker run --rm --network=kong-net \
+  -e "KONG_DATABASE=postgres" \
+  -e "KONG_PG_HOST=kong-database" \
+  -e "KONG_PG_PASSWORD=kongpass@123" \
+  -e "KONG_PASSWORD=test@123" \
+ kong/kong-gateway:3.0.0.0-alpine kong migrations bootstrap
+
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Error: [PostgreSQL error] failed to retrieve PostgreSQL server_version_num: host or service not provided, or not known
+
+  Run with --v (verbose) or --vv (debug) for more details
+
+问题描述：在Centos8系统中，使用docker run时，出现如下报错：
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Error: open /proc/self/uid_map: no such file or directory
+
+解决办法：
+1，卸载podman软件（可以使用rpm -qa|grep docker）
+yum remove docker
+2,下载docker-ce源
+curl https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
+3，安装docker-ce
+yum install docker-ce -y
+
+问题原因分析：
+Centos 8使用yum install docker -y时，默认安装的是podman-docker软件
+
+
+docker run -d --name kong-gateway \
+  --network=kong-net \
+  -e "KONG_DATABASE=postgres" \
+  -e "KONG_PG_HOST=kong-database" \
+  -e "KONG_PG_USER=kong" \
+  -e "KONG_PG_PASSWORD=kongpass@123" \
+  -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" \
+  -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \
+  -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
+  -e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
+  -e "KONG_ADMIN_LISTEN=0.0.0.0:8001" \
+  -e "KONG_ADMIN_GUI_URL=http://localhost:8002" \
+  -e KONG_LICENSE_DATA \
+  -p 8000:8000 \
+  -p 8443:8443 \
+  -p 8001:8001 \
+  -p 8444:8444 \
+  -p 8002:8002 \
+  -p 8445:8445 \
+  -p 8003:8003 \
+  -p 8004:8004 \
+  kong/kong-gateway:3.0.0.0-alpine
+
+
+方案2 独立服务器
+
+Linux查看端口占用
+lsof -i:port
+

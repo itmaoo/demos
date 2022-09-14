@@ -1,0 +1,9 @@
+1. service 添加jwt插件
+2.创建Customer
+3.创建Credential重点
+  3.1 key 用于识别用户，在创建jwt token时 识别为iss
+  3.2 Secret 在创建jwt token时 识别为秘钥
+  3.2 Algorithm 在创建jwt token时 识别为算法
+4.创建 jwt token
+  在第三方创建 https://tooltt.com/jwt-encode/
+5. 使用token 访问接口
