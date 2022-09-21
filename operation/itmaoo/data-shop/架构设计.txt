@@ -1,0 +1,9 @@
+
+
+
+Kong相关交互
+创建接口
+  创建Service》创建Route》添加Route级别JWT》添加Route级别RateLimit限制对象Customer》
+  创建Certificate（用户itmaoo下）》生成测试JWT
+购买接口
+  创建用户》创建Certificate》生成JWT

@@ -47,7 +47,7 @@ directory index of "/home/ui/data-shop/build/" is forbidden
 
 后端
 
-文件复制shop
+文件复制shop（lib目录没有依赖新增不需要变更）
 scp /Users/istone/IdeaItmaooProjects/shop/app/ishop/target/ishop-1.0-SNAPSHOT.jar root@106.15.230.209:/home/jars/shop/
 scp -r /Users/istone/IdeaItmaooProjects/shop/app/ishop/target/lib root@106.15.230.209:/home/jars/shop/
 
@@ -59,3 +59,8 @@ ps -ef|grep java
 手动启动
 cd /home/jars/shop/
 java -Dcsp.sentinel.dashboard.server=localhost:20001 -Dproject.name=shop -jar ishop-1.0-SNAPSHOT.jar -Dspring.config.location=./application.yml
+
+文件复制spider（lib目录没有依赖新增不需要变更）
+
+scp /Users/istone/IdeaItmaooProjects/shop/app/spider/target/spider-1.0-SNAPSHOT.jar root@106.15.230.209:/home/jars/spider/
+scp /Users/istone/IdeaItmaooProjects/shop/app/spider/target/lab root@106.15.230.209:/home/jars/spider/
