@@ -1,0 +1,39 @@
+
+ 使用console测试跨域
+ api.itmaoo.com
+106.15.230.209
+
+ var token= "Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDIyIjoic3RvY2tTZWFyY2gyMiJ9.mvdoC9boclo8pFg-lrVeT31GyRxYuKt9Ze5rUYBeeGI";
+ var xhr = new XMLHttpRequest();
+ xhr.open('POST', 'http://106.15.230.209:8000/itmaoo/stock25');
+ xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+  xhr.setRequestHeader("Authorization","Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDI1Ijoic3RvY2tTZWFyY2gyNSJ9.1X_XR6L_mJ7pctfmcoxCQO1PJ-9xv0bCmMT0NReYlmw");
+ xhr.send(null);
+ xhr.onload = function(e) {
+     var xhr = e.target;
+     console.log(xhr.responseText);
+ }
+ api.itmaoo.com
+ var xhr = new XMLHttpRequest();
+ xhr.open('POST', 'http://api.itmaoo.com/itmaoo/stock25');
+ xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+  xhr.setRequestHeader("Authorization","Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDI1Ijoic3RvY2tTZWFyY2gyNSJ9.1X_XR6L_mJ7pctfmcoxCQO1PJ-9xv0bCmMT0NReYlmw");
+ xhr.send(null);
+ xhr.onload = function(e) {
+     var xhr = e.target;
+     console.log(xhr.responseText);
+ }
+
+ var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://106.15.230.209:19001/search/stocks');
+  xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+   xhr.setRequestHeader("Authorization","Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDIyIjoic3RvY2tTZWFyY2gyMiJ9.mvdoC9boclo8pFg-lrVeT31GyRxYuKt9Ze5rUYBeeGI");
+  xhr.send(null);
+  xhr.onload = function(e) {
+      var xhr = e.target;
+      console.log(xhr.responseText);
+  }
+
+ Access-Control-Allow-Origin:*
+ Access-Control-Allow-Headers:X-Requested-With
+ Access-Control-Allow-Methods:GET,POST,OPTIONS

@@ -1,0 +1,13 @@
+ 查看nginx配置文件是否正确
+ nginx -t
+
+ var token= "Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDIyIjoic3RvY2tTZWFyY2gyMiJ9.mvdoC9boclo8pFg-lrVeT31GyRxYuKt9Ze5rUYBeeGI";
+ var xhr = new XMLHttpRequest();
+ xhr.open('POST', 'http://localhost/itmaoo/stock22');
+ xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+  xhr.setRequestHeader("Authorization","Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDIyIjoic3RvY2tTZWFyY2gyMiJ9.mvdoC9boclo8pFg-lrVeT31GyRxYuKt9Ze5rUYBeeGI");
+ xhr.send(null);
+ xhr.onload = function(e) {
+     var xhr = e.target;
+     console.log(xhr.responseText);
+ }
