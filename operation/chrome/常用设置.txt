@@ -25,7 +25,7 @@
  }
 
  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://106.15.230.209:19001/search/stocks');
+  xhr.open('POST', 'https://106.15.230.209:19001/search/stocks');
   xhr.setRequestHeader("Access-Control-Allow-Origin","*");
    xhr.setRequestHeader("Authorization","Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ja1NlYXJjaDIyIjoic3RvY2tTZWFyY2gyMiJ9.mvdoC9boclo8pFg-lrVeT31GyRxYuKt9Ze5rUYBeeGI");
   xhr.send(null);
