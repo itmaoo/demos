@@ -6,3 +6,5 @@ Flutter
 在项目根目录执行flutter create . 注意有个英文符号点！
 最后执行flutter build web就能看到web目录创建成功了。
 执行flutter run -d chrome就能在Chrome浏览器中运行Flutter应用了！
+
+lutter build web --release

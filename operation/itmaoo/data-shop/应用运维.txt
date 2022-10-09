@@ -35,10 +35,11 @@ Flutter
 执行flutter run -d chrome就能在Chrome浏览器中运行Flutter应用了！
 
 前端
+打包  flutter build web --web-renderer html
 文件复制 web下的文件 到 data-shop
   scp -r /Users/istone/IdeaProjects/ui/itmaoo/build/web root@106.15.230.209:/home/ui/data-shop/
 文件复制  文件notice 到 data-shop
-  scp -r /Users/istone/IdeaProjects/ui/stock/notice root@106.15.230.209:/home/ui/data-shop/web
+  scp -r /Users/istone/IdeaProjects/ui/itmaoo/notice root@106.15.230.209:/home/ui/data-shop/web
 
 chmod 777 /home/ui/data-shop
 
