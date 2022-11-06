@@ -1,4 +1,4 @@
-package mao.demo.test.java;
+package mao.demo.test.java.pointerParam;
 
 public class Pojo {
     int age = 0;
