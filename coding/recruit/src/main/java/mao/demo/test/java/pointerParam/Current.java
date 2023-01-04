@@ -1,4 +1,4 @@
-package mao.demo.test.java;
+package mao.demo.test.java.pointerParam;
 
 import java.util.concurrent.ConcurrentHashMap;
 
