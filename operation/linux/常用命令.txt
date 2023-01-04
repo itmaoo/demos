@@ -1,2 +1,7 @@
 按照文件名查找文件
 find -f / --name  nginx.config
+
+
+vi
+  set hlsearch
+  set nu

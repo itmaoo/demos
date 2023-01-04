@@ -70,4 +70,4 @@ Nginx 证书复制到server部署
 scp /Users/istone/Downloads/8516139_api.itmaoo.com_nginx/* root@106.15.230.209:/home/cert/itmaoo/
 
 
-scp -r /Users/istone/Downloads/3d root@106.15.230.209:/home/ui/3d/
+scp -r /Users/istone/Downloads/3d2 root@106.15.230.209:/home/ui/3d/
