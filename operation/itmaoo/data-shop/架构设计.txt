@@ -7,3 +7,8 @@ Kong相关交互
   创建Certificate（用户itmaoo下）》生成测试JWT
 购买接口
   创建用户》创建Certificate》生成JWT
+
+
+传递用户信息
+
+/merchantId/userId/servicePath

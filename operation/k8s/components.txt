@@ -1,0 +1,8 @@
+kubelet 管理容器的启动、监控、运行和删除
+
+
+kubadm 集群初始化
+kubeadm init --apiserver-certificate-key=<your-apiserver-key> --kubernetes-version
+
+kubectl 集群管理
+kubectl apply -f https://docs.projectcalico.org/v3.24/manifests/crds.y

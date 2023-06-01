@@ -1,0 +1,8 @@
+#复制文件
+scp /Users/istone/IdeaProjects2022/xxl-job/xxl-job-admin/target/xxl-job-admin-2.4.1-SNAPSHOT.jar root@106.15.230.209:/home/jars/xxl/
+
+scp /Users/istone/IdeaProjects2022/xxl-job/xxl-job-executor-samples/xxl-job-executor-sample-springboot/target/xxl-job-executor-sample-springboot-2.4.1-SNAPSHOT.jar root@106.15.230.209:/home/jars/xxl/
+
+
+nohup java -jar xxl-job-admin-2.4.1-SNAPSHOT.jar >/dev/null 2>&1 &
+nohup java -jar xxl-job-executor-sample-springboot-2.4.1-SNAPSHOT.jar >/dev/null 2>&1 &

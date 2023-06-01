@@ -64,7 +64,7 @@ java -Dcsp.sentinel.dashboard.server=localhost:20001 -Dproject.name=shop -jar is
 文件复制spider（lib目录没有依赖新增不需要变更）
 
 scp /Users/istone/IdeaItmaooProjects/shop/app/spider/target/spider-1.0-SNAPSHOT.jar root@106.15.230.209:/home/jars/spider/
-scp /Users/istone/IdeaItmaooProjects/shop/app/spider/target/lab root@106.15.230.209:/home/jars/spider/
+scp -r /Users/istone/IdeaItmaooProjects/shop/app/spider/target/lib root@106.15.230.209:/home/jars/spider/
 
 Nginx 证书复制到server部署
 scp /Users/istone/Downloads/8516139_api.itmaoo.com_nginx/* root@106.15.230.209:/home/cert/itmaoo/
