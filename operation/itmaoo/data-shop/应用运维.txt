@@ -40,7 +40,8 @@ Flutter
   scp -r /Users/istone/IdeaProjects/ui/itmaoo/build/web root@106.15.230.209:/home/ui/data-shop/
 文件复制  文件notice 到 data-shop
   scp -r /Users/istone/IdeaProjects/ui/itmaoo/notice root@106.15.230.209:/home/ui/data-shop/web
-
+文件复制  index.html 到 data-shop
+  scp /Users/istone/Downloads/index.html root@106.15.230.209:/home/ui/stock/
 chmod 777 /home/ui/data-shop
 
 403 Forbidden

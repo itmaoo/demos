@@ -1,0 +1,12 @@
+Docker 安装并设置开机自启动
+yum install -y docker-ce docker-ce-cli containerd.io
+当前Itmaoo上安装的版本
+containerd.io    1.6.25-3.1.el8
+docker-ce  3:24.0.7-1.el8
+docker-ce-cli   1:24.0.7-1.el8
+
+启动Docker
+systemctl start docker.service
+
+Docker 卸载
+yum remove docker-ce-cli
